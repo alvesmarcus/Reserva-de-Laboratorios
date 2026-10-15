@@ -1,21 +1,8 @@
+<<<<<<< HEAD
 # Relatório da Prática — Encontro 1
 ## Sistema de Reservas de Laboratórios
 
 ## Disciplina:** Engenharia de Software  
-## Integrantes do grupo e divisão de responsabilidades
-
-| Integrante | Responsabilidade |
-|---|---|
-| **Andrew Lippy de Mattos Pereira** | Desenvolvimento do backend, com implementação e manutenção das rotas da API utilizando FastAPI. |
-| **Cauã Pereira Menezes** | Desenvolvimento do frontend, incluindo a estrutura HTML, a estilização CSS e a interface do sistema. |
-| **Marcus Vinicius Alves de Oliveira** | Integração entre frontend e backend, comunicação com a API e verificação das requisições HTTP. |
-| **Matheus Prates Gaspar Silva** | Realização de testes funcionais, verificação dos endpoints e análise de respostas de sucesso e erro. |
-| **Nathan de Faria Alves Alvarenga** | Elaboração da documentação técnica, organização do README e descrição das instruções para execução do projeto. |
-| **Roberto Kleber da Fonseca Ponce Junior** | Organização das evidências do projeto, registro das capturas de tela e apoio à revisão final do relatório. |
-
-### Trabalho colaborativo
-
-O desenvolvimento do Sistema de Reservas de Laboratórios envolve a colaboração de todos os integrantes, com divisão de responsabilidades para facilitar a organização do código, a realização dos testes, a documentação e a validação do funcionamento da aplicação.
 
 ## 1. Objetivo da prática
 
@@ -127,18 +114,21 @@ Porque permite visualizar as camadas do sistema em conjunto, compreender a rela�
 
 ## 6. Composição do grupo e responsabilidades
 
-**Integrantes:**
-- [Nome do integrante 1]
-- [Nome do integrante 2]
-- [Nome do integrante 3]
+## Integrantes do grupo e divisão de responsabilidades
 
-**Distribuição inicial de responsabilidades:**
-- Back-end e API: [Nome do responsável].
-- Front-end e interface: [Nome do responsável].
-- Testes e validação: [Nome do responsável].
-- Evidências e documentação: [Nome do responsável].
+| Integrante | Responsabilidade |
+|---|---|
+| **Andrew Lippy de Mattos Pereira** | Desenvolvimento do backend, com implementação e manutenção das rotas da API utilizando FastAPI. |
+| **Cauã Pereira Menezes** | Desenvolvimento do frontend, incluindo a estrutura HTML, a estilização CSS e a interface do sistema. |
+| **Marcus Vinicius Alves de Oliveira** | Integração entre frontend e backend, comunicação com a API e verificação das requisições HTTP. |
+| **Matheus Prates Gaspar Silva** | Realização de testes funcionais, verificação dos endpoints e análise de respostas de sucesso e erro. |
+| **Nathan de Faria Alves Alvarenga** | Elaboração da documentação técnica, organização do README e descrição das instruções para execução do projeto. |
+| **Roberto Kleber da Fonseca Ponce Junior** | Organização das evidências do projeto, registro das capturas de tela e apoio à revisão final do relatório. |
 
-*Ajustar os nomes e as responsabilidades conforme a organização real do grupo.*
+### Trabalho colaborativo
+
+O desenvolvimento do Sistema de Reservas de Laboratórios envolve a colaboração de todos os integrantes, com divisão de responsabilidades para facilitar a organização do código, a realização dos testes, a documentação e a validação do funcionamento da aplicação.
+
 
 ## 7. Proposta preliminar de evolução
 
@@ -147,4 +137,3 @@ Como evolução do sistema, propõe-se aprimorar as mensagens de erro, validar o
 ## 8. Conclusão
 
 A prática permitiu executar o back-end e o front-end, verificar a rota de status, observar as requisições HTTP e analisar o comportamento do sistema diante de falhas controladas. Os resultados demonstraram a importância da integração entre navegador, JavaScript e API.
-
