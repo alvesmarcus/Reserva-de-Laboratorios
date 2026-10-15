@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Relatório da Prática — Encontro 1
 ## Sistema de Reservas de Laboratórios
 
