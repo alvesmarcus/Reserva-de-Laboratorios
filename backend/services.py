@@ -60,6 +60,7 @@ def obter_reserva(reserva_id, conn=None):
     if not row: raise ReservaNaoEncontrada("Reserva não encontrada.")
     return _dict(row)
 
+
 def atualizar_reserva(reserva_id: int, dados: ReservaAtualizacao):
     with conectar() as conn:
         existente = conn.execute(
@@ -78,9 +79,9 @@ def atualizar_reserva(reserva_id: int, dados: ReservaAtualizacao):
         conn.execute(
             """
             UPDATE reservas
-            SET laboratorio=?, responsavel=?, data=?, turno=?,
-                finalidade=?, quantidade_alunos=?, status=?
-            WHERE id=?
+            SET laboratorio = ?, responsavel = ?, data = ?, turno = ?,
+                finalidade = ?, quantidade_alunos = ?, status = ?
+            WHERE id = ?
             """,
             (
                 dados.laboratorio,
