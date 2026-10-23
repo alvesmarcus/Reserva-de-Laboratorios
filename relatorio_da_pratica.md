@@ -1,139 +1,187 @@
-# Relatório da Prática — Encontro 1
+# Relatório da Prática — Encontros 1 e 2
 ## Sistema de Reservas de Laboratórios
 
-## Disciplina:** Engenharia de Software  
+# Disciplina: Engenharia de Software
 
 ## 1. Objetivo da prática
 
-Preparar o ambiente de desenvolvimento, executar o Sistema de Reservas de Laboratórios e verificar a integração entre o navegador, o JavaScript e a API desenvolvida com FastAPI.
+O objetivo da prática foi executar o Sistema de Reservas de Laboratórios e entender como o frontend se comunica com o backend. No segundo encontro, também foi necessário adicionar o campo de quantidade de alunos, fazer a validação dos valores e verificar se as informações estavam sendo salvas corretamente no banco de dados.
 
-## 2. Identificação das camadas e dos arquivos
+## 2. Arquivos do projeto e suas funções
 
-| Arquivo | Camada | Responsabilidade |
-|---|---|---|
-| `backend/main.py` | API | Cria a aplicação FastAPI e define as rotas, incluindo `/api/status`. |
-| `backend/requirements.txt` | Ambiente | Declara as dependências Python. |
-| `frontend/index.html` | Apresentação | Estrutura a página. |
-| `frontend/styles.css` | Apresentação | Define a aparência e a disposição dos elementos. |
-| `frontend/app.js` | Integração | Faz requisições HTTP e atualiza a interface. |
-| `backend/database.py` | Persistência | Gerencia operações relacionadas ao banco de dados. |
-| `backend/models.py` | Modelagem | Define os modelos utilizados pela aplicação. |
-| `backend/services.py` | Regras de negócio | Implementa operações relacionadas às reservas. |
-| `tests/test_api.py` | Testes | Contém testes automatizados da API. |
+| Arquivo | Função |
+|---|---|
+| `backend/main.py` | Cria a API e define as rotas do sistema. |
+| `backend/requirements.txt` | Contém as bibliotecas necessárias para executar o backend. |
+| `frontend/index.html` | Cria a estrutura da página e do formulário. |
+| `frontend/styles.css` | Define a aparência da página. |
+| `frontend/app.js` | Envia os dados para a API e mostra as reservas na tela. |
+| `backend/database.py` | Faz a conexão com o banco de dados SQLite e cria a tabela de reservas. |
+| `backend/models.py` | Define os dados necessários para uma reserva e suas validações. |
+| `backend/services.py` | Contém as funções para cadastrar, consultar, editar e excluir reservas. |
+| `tests/test_api.py` | Arquivo destinado aos testes automatizados da API. |
 
 ## 3. Evidências da prática
 
-### Evidência A — Estrutura do projeto
+### Evidências do Encontro 1
+
+**Evidência A — Estrutura do projeto**
 
 ![Evidência A — Estrutura do projeto](evidencias/evidenciaA.png)
 
-A imagem apresenta a organização das pastas e dos arquivos no VS Code.
+Mostra as pastas e os arquivos do projeto no VS Code.
 
-### Evidência B — Inicialização do back-end
+**Evidência B — Inicialização do backend**
 
-![Evidência B — Inicialização do back-end](evidencias/evidenciaB.png)
+![Evidência B — Inicialização do backend](evidencias/evidenciaB.png)
 
-O terminal mostra o Uvicorn em execução e a aplicação FastAPI inicializada.
+Mostra o servidor Uvicorn funcionando.
 
-### Evidência C — Interface do sistema
+**Evidência C — Interface do sistema**
 
 ![Evidência C — Interface do sistema](evidencias/evidenciaC.png)
 
-A interface do Sistema de Reservas de Laboratórios foi aberta pelo servidor HTTP na porta 5500.
+Mostra a página do sistema aberta no navegador.
 
-### Evidência D — Integração entre front-end e API
+**Evidência D — Requisições da API**
 
 ![Evidência D — Network](evidencias/evidenciaD.png)
 
-A aba Network mostra as requisições `status` e `reservas` com resposta HTTP 200.
+Mostra as requisições feitas pelo navegador na aba Network.
 
-### Evidência E — Resposta da API
+**Evidência E — Resposta da API**
 
 ![Evidência E — Swagger](evidencias/evidenciaE.png)
 
-A rota `GET /api/status` retornou HTTP 200 e o JSON `{"status":"online"}`.
+Mostra a rota `/api/status` retornando o status online.
 
-### Evidência F1 — API parada
+**Evidência F1 — API parada**
 
 ![Evidência F1 — API parada](evidencias/evidenciaF1.png)
 
-Com o Uvicorn interrompido, as requisições à API falharam, demonstrando a dependência do front-end em relação ao back-end.
+Mostra o que acontece quando o servidor da API é desligado.
 
-### Evidência F2 — URL incorreta
+**Evidência F2 — URL incorreta**
 
 ![Evidência F2 — URL incorreta](evidencias/evidenciaF2.png)
 
-A chamada à rota incorreta `/api/statu` retornou HTTP 404, enquanto a consulta de reservas continuou respondendo com HTTP 200.
+Mostra o erro 404 ao acessar uma rota escrita incorretamente.
 
-### Evidência F3 — Abertura direta do HTML
+**Evidência F3 — Abertura direta do HTML**
 
 ![Evidência F3 — Abertura direta](evidencias/evidenciaF3.png)
 
-O arquivo `index.html` foi aberto diretamente pelo endereço `file://`, permitindo comparar esse acesso com a utilização do servidor HTTP.
+Mostra a abertura do arquivo HTML diretamente pelo navegador.
 
-## 4. Percurso dos dados
+### Evidências do Encontro 2
 
-1. O navegador carrega `frontend/index.html` e aplica os estilos de `frontend/styles.css`.
-2. O JavaScript de `frontend/app.js` executa requisições HTTP para consultar o status da API e as reservas.
-3. O servidor Uvicorn recebe as requisições e executa as rotas definidas em `backend/main.py`.
-4. A API retorna respostas em JSON, incluindo `{"status":"online"}` na rota de status.
-5. O JavaScript interpreta as respostas e utiliza os dados para atualizar a interface.
+**EvidênciaB_frontaberto — Formulário atualizado**
+
+Mostra o campo de quantidade de alunos no formulário e a coluna correspondente na tabela de reservas.
+
+**EvidenciaC_25_201 — Cadastro realizado com sucesso**
+
+Mostra a criação de uma reserva pela API, com resposta `201 Created` e o campo `quantidade_alunos` no resultado.
+
+**EvidênciaC_41  — Teste com 41 alunos**
+
+Mostra que a API rejeitou o valor 41 e retornou `422 Unprocessable Entity`, pois o limite máximo permitido é 40 alunos.
+
+**EvidênciaC_Campoausente — Campo obrigatório ausente**
+
+Mostra que a API retornou `422 Unprocessable Entity` quando o campo `quantidade_alunos` não foi enviado.
+
+## 4. Como os dados funcionam no sistema
+
+1. O navegador abre a página do sistema.
+2. O JavaScript coleta os dados preenchidos no formulário.
+3. Os dados são enviados em formato JSON para a API.
+4. O backend verifica se os dados estão corretos.
+5. Se estiver tudo certo, os dados são salvos no banco SQLite.
+6. A API retorna uma resposta ao frontend.
+7. O JavaScript atualiza a tabela para mostrar as reservas cadastradas.
+
+No segundo encontro, esse processo passou a incluir também a quantidade de alunos da reserva.
 
 ## 5. Perguntas de verificação
 
-**17. `app = FastAPI()` inicia o servidor? Justifique.**
+### Questões do Encontro 1
 
-Não. Essa instrução cria a aplicação FastAPI. O servidor é iniciado pelo Uvicorn, que executa a aplicação e atende às requisições HTTP.
+**17. `app = FastAPI()` inicia o servidor?**
+
+Não. Essa linha cria a aplicação. O Uvicorn é responsável por iniciar o servidor e receber as requisições.
 
 **18. Qual processo atende à porta 8000?**
 
-O processo Uvicorn, responsável por executar a aplicação FastAPI.
+O Uvicorn, que executa o backend.
 
 **19. Qual processo atende à porta 5500?**
 
-O servidor HTTP simples iniciado com o comando `py -m http.server 5500`, responsável por disponibilizar os arquivos do front-end.
+O servidor HTTP iniciado com o comando `py -m http.server 5500`, que disponibiliza os arquivos do frontend.
 
 **20. Onde a rota `/api/status` é definida?**
 
-No arquivo `backend/main.py`, por meio do decorador `@app.get("/api/status")`.
+No arquivo `backend/main.py`.
 
-**21. Qual evidência comprova que a requisição alcançou o back-end?**
+**21. Como comprovar que a requisição chegou ao backend?**
 
-A requisição aparece na aba Network com a URL da API e resposta HTTP 200. O terminal do Uvicorn também registra as requisições recebidas.
+Podemos verificar a requisição na aba Network do navegador e também observar os registros no terminal do Uvicorn.
 
-**22. Por que abrir a pasta raiz no VS Code facilita a compreensão?**
+**22. Por que abrir a pasta raiz no VS Code ajuda?**
 
-Porque permite visualizar as camadas do sistema em conjunto, compreender a relação entre os arquivos e identificar como o front-end se comunica com o back-end.
+Porque permite visualizar todos os arquivos e entender melhor como o frontend e o backend se relacionam.
 
 **23. Qual é a diferença entre Console, Network e terminal da API?**
 
-- **Console:** apresenta mensagens e erros do JavaScript.
-- **Network:** mostra requisições HTTP, endereços, métodos, respostas e códigos de status.
-- **Terminal da API:** apresenta os registros do servidor Uvicorn e da aplicação Python.
+- **Console:** mostra mensagens e erros do JavaScript.
+- **Network:** mostra as requisições e respostas HTTP.
+- **Terminal da API:** mostra os registros e erros do backend.
 
-## 6. Composição do grupo e responsabilidades
+### Questões do Encontro 2
 
-## Integrantes do grupo e divisão de responsabilidades
+**5. Por que a validação HTML não substitui a validação Pydantic?**
+
+Porque a validação HTML funciona no navegador e pode ser contornada. O Pydantic valida os dados recebidos pelo backend, mesmo quando a requisição é feita diretamente à API.
+
+**6. Por que utilizar `JSON.stringify()`?**
+
+Porque essa função transforma o objeto JavaScript em uma string JSON que pode ser enviada na requisição HTTP.
+
+**7. Onde o código 201 é definido?**
+
+No arquivo `backend/main.py`, na rota `POST /api/reservas`, por meio de `status_code=201`. Ele indica que a reserva foi criada com sucesso.
+
+**8. O que aconteceria se o JavaScript enviasse `quantidadeAlunos` em vez de `quantidade_alunos`?**
+
+A API não reconheceria esse nome como o campo esperado. Como `quantidade_alunos` é obrigatório, a requisição retornaria erro 422.
+
+**9. Como comprovar que a requisição chegou ao servidor?**
+
+Podemos verificar a requisição na aba Network e observar o registro correspondente no terminal do Uvicorn.
+
+## 6. Integrantes do grupo e responsabilidades
 
 | Integrante | Responsabilidade |
 |---|---|
-| **Andrew Lippy de Mattos Pereira** | Desenvolvimento do backend, com implementação e manutenção das rotas da API utilizando FastAPI. |
-| **Cauã Pereira Menezes** | Desenvolvimento do frontend, incluindo a estrutura HTML, a estilização CSS e a interface do sistema. |
-| **Marcus Vinicius Alves de Oliveira** | Integração entre frontend e backend, comunicação com a API e verificação das requisições HTTP. |
-| **Matheus Prates Gaspar Silva** | Realização de testes funcionais, verificação dos endpoints e análise de respostas de sucesso e erro. |
-| **Nathan de Faria Alves Alvarenga** | Elaboração da documentação técnica, organização do README e descrição das instruções para execução do projeto. |
-| **Roberto Kleber da Fonseca Ponce Junior** | Organização das evidências do projeto, registro das capturas de tela e apoio à revisão final do relatório. |
+| **Andrew Lippy de Mattos Pereira** | Desenvolvimento do backend e das rotas da API. |
+| **Cauã Pereira Menezes** | Desenvolvimento da página, do HTML e do CSS. |
+| **Marcus Vinicius Alves de Oliveira** | Integração entre frontend e backend e verificação das requisições. |
+| **Matheus Prates Gaspar Silva** | Testes do sistema e verificação das respostas da API. |
+| **Nathan de Faria Alves Alvarenga** | Documentação do projeto e organização do README. |
+| **Roberto Kleber da Fonseca Ponce Junior** | Organização das evidências e apoio à revisão do relatório. |
 
-### Trabalho colaborativo
+### Trabalho em grupo
 
-O desenvolvimento do Sistema de Reservas de Laboratórios envolve a colaboração de todos os integrantes, com divisão de responsabilidades para facilitar a organização do código, a realização dos testes, a documentação e a validação do funcionamento da aplicação.
+O projeto foi desenvolvido com a participação dos integrantes, dividindo as tarefas para facilitar a programação, os testes e a documentação.
 
+## 7. Melhorias futuras
 
-## 7. Proposta preliminar de evolução
-
-Como evolução do sistema, propõe-se aprimorar as mensagens de erro, validar os campos do formulário, ampliar os testes automatizados, melhorar os filtros de busca e implementar mecanismos para prevenir conflitos de horário nas reservas.
+Como melhorias, o sistema pode receber novos testes automatizados, mensagens de erro mais claras, filtros melhores e outras funcionalidades para facilitar o uso e evitar conflitos de horários.
 
 ## 8. Conclusão
 
-A prática permitiu executar o back-end e o front-end, verificar a rota de status, observar as requisições HTTP e analisar o comportamento do sistema diante de falhas controladas. Os resultados demonstraram a importância da integração entre navegador, JavaScript e API.
+Durante os dois encontros, foi possível entender melhor como o frontend se comunica com o backend e como os dados são enviados, validados e salvos no banco de dados.
 
+No segundo encontro, foi adicionado o campo de quantidade de alunos, permitindo cadastrar reservas com valores entre 1 e 40. Os testes mostraram que a API aceita dados válidos e rejeita valores fora do limite ou quando o campo obrigatório não é enviado.
+
+A prática também ajudou a entender a importância de manter o frontend, o backend e o banco de dados funcionando em conjunto para que o sistema execute suas funções corretamente.

@@ -18,6 +18,10 @@ async function verificarAPI() {
 verificarAPI();
 
 const $ = (id) => document.getElementById(id);
+console.log("Formulário:", $("form"));
+console.log("Lista:", $("lista"));
+console.log("Quantidade:", $("quantidade-alunos"));
+console.log("Botão filtrar:", $("filtrar"));
 let cache = [];
 function dados() {
   return {
@@ -26,6 +30,7 @@ function dados() {
     data: $("data").value,
     turno: $("turno").value,
     finalidade: $("finalidade").value,
+    quantidade_alunos: Number($("quantidade-alunos").value),
     status: $("status").value,
   };
 }
@@ -40,11 +45,22 @@ async function listar() {
   const r = await fetch(`${API}?${q}`);
   cache = await r.json();
   $("lista").innerHTML = cache
-    .map(
-      (x) =>
-        `<tr><td>${x.laboratorio}</td><td>${x.data}</td><td>${x.turno}</td><td>${x.responsavel}</td><td>${x.status}</td><td><button onclick="editar(${x.id})">Editar</button> <button onclick="excluir(${x.id})">Excluir</button></td></tr>`,
-    )
-    .join("");
+  .map(
+    (x) =>
+      `<tr>
+        <td>${x.laboratorio}</td>
+        <td>${x.data}</td>
+        <td>${x.turno}</td>
+        <td>${x.responsavel}</td>
+        <td>${x.quantidade_alunos ?? "-"}</td>
+        <td>${x.status}</td>
+        <td>
+          <button onclick="editar(${x.id})">Editar</button>
+          <button onclick="excluir(${x.id})">Excluir</button>
+        </td>
+      </tr>`,
+  )
+  .join("");
 }
 window.editar = (id) => {
   const x = cache.find((r) => r.id === id);
@@ -56,8 +72,11 @@ window.editar = (id) => {
     "turno",
     "finalidade",
     "status",
-  ])
+  ]) {
     $(k).value = x[k];
+  }
+
+  $("quantidade-alunos").value = x.quantidade_alunos ?? "";
   window.scrollTo(0, 0);
 };
 window.excluir = async (id) => {
@@ -68,27 +87,42 @@ window.excluir = async (id) => {
   );
   listar();
 };
-$("form").addEventListener("submit", async (e) => {
+const formulario = document.getElementById("form");
+
+formulario.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const id = $("id").value;
-  const r = await fetch(id ? `${API}/${id}` : API, {
-    method: id ? "PUT" : "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dados()),
-  });
-  if (!r.ok) {
-    const er = await r.json();
-    mensagem(`${r.status}: ${JSON.stringify(er.detail)}`, false);
-    return;
+
+  try {
+    const r = await fetch(id ? `${API}/${id}` : API, {
+      method: id ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados()),
+    });
+
+    if (!r.ok) {
+      const er = await r.json();
+      mensagem(`${r.status}: ${JSON.stringify(er.detail)}`, false);
+      return;
+    }
+
+    mensagem(id ? "Reserva atualizada." : "Reserva criada.");
+    e.target.reset();
+    $("id").value = "";
+
+    await listar();
+  } catch (erro) {
+    console.error("Erro ao salvar reserva:", erro);
+    mensagem("Não foi possível conectar à API.", false);
   }
-  mensagem(id ? "Reserva atualizada." : "Reserva criada.");
-  e.target.reset();
-  $("id").value = "";
-  listar();
 });
+
 $("cancelar").onclick = () => {
   $("form").reset();
   $("id").value = "";
 };
+
 $("filtrar").onclick = listar;
+
 listar();
